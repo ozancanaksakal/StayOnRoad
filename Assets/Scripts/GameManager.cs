@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -13,10 +11,21 @@ public class GameManager : MonoBehaviour
 
     public Text loseScoreText, winScoreText, inGameScoreText;
 
+    private void Start() {
+        loseUI.SetActive(false);
+        winUI.SetActive(false);
+    }
+
     public void LoseLevel()
     {
         loseUI.SetActive(true);
+        loseScoreText.text = "Toplam Puan: " + score;
+        inGameScoreText.gameObject.SetActive(false);
+    }
+    public void WinLevel()
+    {
         winScoreText.text = "Toplam Puan: " + score;
+        winUI.SetActive(true);
         inGameScoreText.gameObject.SetActive(false);
     }
 
@@ -35,28 +44,8 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
-
-    public void WinLevel()
-    {
-        winScoreText.text = "Toplam Puan: " + score;
-        winUI.SetActive(true);
-        inGameScoreText.gameObject.SetActive(false);
-    }
-
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
